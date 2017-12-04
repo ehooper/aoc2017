@@ -1,0 +1,6 @@
+[package]
+name = "inverse-captcha"
+version = "1.0.0"
+authors = ["ehooper"]
+
+[dependencies]
