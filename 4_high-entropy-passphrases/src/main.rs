@@ -15,18 +15,18 @@ impl<'a> From<&'a str> for AnagramSet {
                 aset.count[(c - b'a') as usize] += 1;
             }
         }
-        return aset;
+        aset
     }
 }
 
 fn is_valid<'a, T : Eq + std::hash::Hash + From<&'a str>>(passphrase : &'a str) -> bool {
     let mut hs = HashSet::<T>::new();
     for word in passphrase.split_whitespace() {
-        if hs.insert(T::from(word)) == false {
+        if ! hs.insert(T::from(word)) {
             return false;
         }
     }
-    return true;
+    true
 }
 
 fn main() {

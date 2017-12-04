@@ -1,6 +1,6 @@
 use std::io;
 
-fn checksum_diff(nums : &Vec<i32>) -> i32 {
+fn checksum_diff(nums : &[i32]) -> i32 {
     let mut max = std::i32::MIN;
     let mut min = std::i32::MAX;
     for &i in nums {
@@ -14,7 +14,7 @@ fn checksum_diff(nums : &Vec<i32>) -> i32 {
     max - min
 }
 
-fn checksum_div(nums : &Vec<i32>) -> i32 {
+fn checksum_div(nums : &[i32]) -> i32 {
     let mut iter = nums.iter();
     while let Some(x) = iter.next() {
         for y in iter.clone() {
@@ -25,7 +25,7 @@ fn checksum_div(nums : &Vec<i32>) -> i32 {
             }
         }
     }
-    return 0;
+    0
 }
 
 fn main() {

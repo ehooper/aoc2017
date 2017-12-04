@@ -7,7 +7,7 @@ fn main() {
     io::stdout().flush().unwrap();
     while let Ok(_) = io::stdin().read_line(&mut input) {
         let num : i32 = input.trim_right().parse().unwrap();
-        let ring : i32 = ((num as f64).sqrt().ceil() as i32) / 2;
+        let ring : i32 = (f64::from(num).sqrt().ceil() as i32) / 2;
         let mut ring_min = (ring - 1) * 2 + 1;
         ring_min = ring_min * ring_min + 1;
         let m1 = ring_min + (ring - 1);
