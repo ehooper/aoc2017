@@ -31,7 +31,7 @@ fn is_valid<'a, T : Eq + std::hash::Hash + From<&'a str>>(passphrase : &'a str) 
 
 fn main() {
     let arg = std::env::args().nth(1);
-    let no_anagrams = arg.map_or(false, |s| s == "--no-anagrams");
+    let part2 = arg.map_or(false, |s| s == "--part2");
 
     let mut input = String::new();
     println!("Enter passphrase list:");
@@ -41,7 +41,7 @@ fn main() {
             println!("{} valid", count);
             println!("Enter passphrase list:");
             count = 0;
-        } else if no_anagrams {
+        } else if part2 {
             if is_valid::<AnagramSet>(input.as_ref()) {
                 count += 1;
             }
