@@ -1,0 +1,14 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "registers"
+version = "1.0.0"
+
+[dependencies]
+regex = "0.2.3"
+
+[dependencies.nom]
+features = [
+    "regex",
+    "regexp_macros",
+]
+version = "3.2.1"
