@@ -1,0 +1,6 @@
+[package]
+name = "stream-processing"
+version = "1.0.0"
+authors = ["ehooper <ehooper@umich.edu>"]
+
+[dependencies]
