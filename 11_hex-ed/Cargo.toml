@@ -1,0 +1,6 @@
+[package]
+name = "hex-ed"
+version = "1.0.0"
+authors = ["ehooper <ehooper@umich.edu>"]
+
+[dependencies]
