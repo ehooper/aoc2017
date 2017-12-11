@@ -27,14 +27,21 @@ use std::str::FromStr;
 
 impl FromStr for HexDir {
     type Err = String;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s.to_lowercase().as_ref() {
-            "n"  => Ok(N),
-            "ne" => Ok(NE),
-            "se" => Ok(SE),
-            "s"  => Ok(S),
-            "sw" => Ok(SW),
-            "nw" => Ok(NW),
+
+    fn from_str(s : &str) -> Result<Self, Self::Err> {
+        use std::ascii::AsciiExt;
+
+        let mut si = *b"  ";
+        let len = s.len().min(2);
+        si[..len].copy_from_slice(&s.as_bytes()[..len]);
+        si.make_ascii_lowercase();
+        match &si {
+            b"n " => Ok(N),
+            b"ne" => Ok(NE),
+            b"se" => Ok(SE),
+            b"s " => Ok(S),
+            b"sw" => Ok(SW),
+            b"nw" => Ok(NW),
             _ => Err(format!("could not parse direction: '{}'", s)),
         }
     }
@@ -53,10 +60,10 @@ struct PathDistance {
 
 fn path_distance(path : &[HexDir]) -> PathDistance {
     let mut max = 0;
-    let d = path.iter().fold((0, 0), |acc, hd| {
-        let next = hd.apply_step(acc);
-        max = i32::max(max, distance(next));
-        next
+    let d = path.iter().fold((0, 0), |mut acc, hd| {
+        acc = hd.apply_step(acc);
+        max = i32::max(max, distance(acc));
+        acc
     });
     PathDistance { steps: distance(d), max }
 }
@@ -75,8 +82,6 @@ fn prompt() {
 fn main() {
     use std::io::prelude::*;
 
-    let mut input = String::new();
-
     let run = |input : &str| {
         let parsed_input = parse_input(input);
         if let Ok(input) = parsed_input {
@@ -87,6 +92,8 @@ fn main() {
             eprintln!("{}", parsed_input.unwrap_err());
         }
     };
+
+    let mut input = String::new();
 
     if let Some(filename) = std::env::args_os().nth(1) {
         let mut file = std::fs::File::open(filename).expect("file not found");
