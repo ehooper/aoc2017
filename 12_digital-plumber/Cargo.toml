@@ -1,0 +1,7 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "digital-plumber"
+version = "1.0.0"
+
+[dependencies]
+nom = "3.2.1"
