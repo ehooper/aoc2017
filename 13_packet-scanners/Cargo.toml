@@ -1,0 +1,8 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "packet-scanners"
+version = "1.0.0"
+
+[dependencies]
+libc = "0.2.34"
+nom = "3.2.1"
