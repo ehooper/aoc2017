@@ -6,3 +6,4 @@ version = "1.0.0"
 [dependencies]
 libc = "0.2.34"
 nom = "3.2.1"
+num = "0.1.41"

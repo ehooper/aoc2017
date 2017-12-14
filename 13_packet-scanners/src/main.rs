@@ -1,5 +1,6 @@
 #[macro_use] extern crate nom;
 extern crate libc;
+extern crate num;
 
 named!(num<&str, usize>, map_res!(nom::digit, str::parse));
 named!(range<&str, usize>, verify!(num, |r| r > 0));
@@ -15,15 +16,24 @@ fn severity(firewall : &[(usize, usize)], delay : usize) -> usize {
     severity
 }
 
-fn min_delay(firewall : &[(usize, usize)]) -> usize {
+fn min_delay(firewall : &[(usize, usize)]) -> Option<usize> {
+    use num::Integer;
+
     let firewall : Vec<(usize, usize)> = firewall.iter().cloned()
         .map(|(depth, period)| (period, (period - depth % period) % period))
         .collect();
-    let mut delay = 0;
-    while firewall.iter().cloned().any(|(period, offset)| delay % period == offset) {
-        delay += 1;
+
+    let lcm = firewall.iter().cloned().fold(1, |acc, (p, _)| acc.lcm(&p));
+    let gcd = firewall.iter().cloned().fold(lcm, |acc, (p, _)| acc.gcd(&p));
+
+    let mut delay = gcd;
+    while delay < lcm {
+        if ! firewall.iter().cloned().any(|(period, offset)| delay % period == offset) {
+            return Some(delay);
+        }
+        delay += gcd;
     }
-    delay
+    None
 }
 
 fn parse_input(input : &str) -> Option<Vec<(usize, usize)>> {
@@ -59,7 +69,11 @@ fn main() {
     let run = |input : &str| {
         if let Some(input) = parse_input(input) {
             println!("severity(0):   {}", severity(&input, 0));
-            println!("minimum delay: {}", min_delay(&input));
+            if let Some(delay) = min_delay(&input) {
+                println!("minimum delay: {}", delay);
+            } else {
+                println!("no solution exists");
+            }
         }
     };
 
@@ -95,5 +109,5 @@ fn test_example() {
 4: 4
 6: 4").unwrap();
     assert_eq!(24, severity(&input, 0));
-    assert_eq!(10, min_delay(&input));
+    assert_eq!(Some(10), min_delay(&input));
 }
