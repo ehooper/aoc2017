@@ -1,0 +1,13 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "disk-defragmentation"
+version = "1.0.0"
+
+[dependencies]
+petgraph = "0.4.10"
+
+[dependencies.knot-hash]
+path = "../10_knot-hash/"
+
+[dependencies.util]
+path = "../util/"

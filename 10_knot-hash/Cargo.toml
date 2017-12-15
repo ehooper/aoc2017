@@ -1,6 +1,11 @@
 [package]
+authors = ["ehooper <ehooper@umich.edu>"]
 name = "knot-hash"
 version = "1.0.0"
-authors = ["ehooper <ehooper@umich.edu>"]
 
-[dependencies]
+[lib]
+name = "knot_hash"
+path = "src/lib.rs"
+
+[dependencies.util]
+path = "../util/"
