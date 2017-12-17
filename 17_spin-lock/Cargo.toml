@@ -1,0 +1,7 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "spinlock"
+version = "1.0.0"
+
+[dependencies.util]
+path = "../util"
