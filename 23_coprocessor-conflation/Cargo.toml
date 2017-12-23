@@ -1,0 +1,11 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "coprocessor-conflation"
+version = "1.0.0"
+
+[dependencies]
+clap = "2.29.0"
+nom = "3.2.1"
+
+[dependencies.util]
+path = "../util/"
