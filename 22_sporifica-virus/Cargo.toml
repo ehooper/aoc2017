@@ -1,0 +1,14 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "sporifica-virus"
+version = "1.0.0"
+
+[dependencies]
+termion = "1.5.1"
+clap = { version = "2.29.0", optional = true }
+
+[dependencies.util]
+path = "../util/"
+
+[features]
+visualization = ["clap"]
