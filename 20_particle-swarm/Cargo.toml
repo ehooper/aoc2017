@@ -1,0 +1,10 @@
+[package]
+authors = ["ehooper <ehooper@umich.edu>"]
+name = "particle-swarm"
+version = "1.0.0"
+
+[dependencies]
+nom = "3.2.1"
+
+[dependencies.util]
+path = "../util/"
